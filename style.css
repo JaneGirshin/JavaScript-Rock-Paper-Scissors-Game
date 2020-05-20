@@ -66,11 +66,8 @@ header > h1 {
     width: 180px;
 }
 
-.action-text {
+#action-text {
     font-size: 30px;
-}
-
-.action-text > p {
     text-align: center;
 }
 
