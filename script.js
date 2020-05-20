@@ -2,12 +2,11 @@ let userPoints = 0;
 let computerPoints = 0;
 const userScore = document.getElementById('user-score');
 const computerScore = document.getElementById('computer-score');
-// const userHand = document.getElementById('user-hand');
-// const computerHand = document.getElementById('computer-hand');
+const hands = document.querySelectorAll('.hands');
+const userHand = document.getElementById('user-hand');
+const computerHand = document.getElementById('computer-hand');
 const actionText = document.getElementById('action-text');
-const rock = document.getElementById('rock');
-const paper = document.getElementById('paper');
-const scissors = document.getElementById('scissors');
+const choices = document.querySelectorAll('[data-choice]')
 
 function RandomChoice(){
     let choices = ['rock', 'paper', 'scissors'];
@@ -27,17 +26,22 @@ function userPlays(userChoice){
         case 'rockrock':
         case 'paperpaper':
         case 'scissorsscissors':
-            document.getElementById('user-hand').src=`./assets/${userChoice}-hand.png`
+            userHand.src=`./assets/${userChoice}-hand.png`
+            computerHand.src=`./assets/${computerChoice}-hand.png`
             userTie();
             break;
         case 'rockscissors':
         case 'paperrock':
         case 'scissorspaper':
+            userHand.src=`./assets/${userChoice}-hand.png`
+            computerHand.src=`./assets/${computerChoice}-hand.png`
             userWin(userChoice, computerChoice);
             break;
         case 'rockpaper':
         case 'paperscissors':
         case 'scissorsrock':
+            userHand.src=`./assets/${userChoice}-hand.png`
+            computerHand.src=`./assets/${computerChoice}-hand.png`
             userLose(userChoice, computerChoice);
             break;
     }
@@ -64,14 +68,19 @@ function updateScore(){
     computerScore.innerHTML = computerPoints;
 }
 
-rock.addEventListener('click', button => {
-    userPlays('rock');
-})
+choices.forEach(button =>{
+    button.addEventListener('click', () => {
+        hands.forEach(hand => {
+            userHand.src=`./assets/rock-hand.png`;
+            computerHand.src=`./assets/rock-hand.png`;
+            hand.style.animation = 'shakeUser 2s ease';
 
-paper.addEventListener('click', button => {
-    userPlays('paper');
-})
-
-scissors.addEventListener('click', button => {
-    userPlays('scissors');
+            setTimeout(() => {
+                hand.addEventListener('animationend', function (){
+                    this.style.animation = '';
+                })
+                userPlays(button.id);
+            }, 2000)
+        })
+    })
 })
