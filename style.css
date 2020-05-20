@@ -95,6 +95,10 @@ header > h1 {
     box-shadow: 0 0 10px #252926;
 }
 
+.no-click {
+    pointer-events: none;
+}
+
 @keyframes shakeUser{
     0% {transform: rotateY(180deg) translateY(0px);}
     17% {transform: rotateY(180deg) translateY(-50px);}

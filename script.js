@@ -73,14 +73,16 @@ choices.forEach(button =>{
         hands.forEach(hand => {
             userHand.src=`./assets/rock-hand.png`;
             computerHand.src=`./assets/rock-hand.png`;
-            hand.style.animation = 'shakeUser 2s ease';
+            hand.style.animation = 'shakeUser 1.75s ease';
+            choices.forEach(button => {button.classList.add('no-click');})
 
             setTimeout(() => {
                 hand.addEventListener('animationend', function (){
                     this.style.animation = '';
                 })
+                choices.forEach(button => {button.classList.remove('no-click');})
                 userPlays(button.id);
-            }, 2000)
+            }, 1750)
         })
     })
 })
